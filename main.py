@@ -5,9 +5,9 @@ BACKGROUND_COLOR = "#B1DDC6"
 to_learn = {}
 
 try:
-    data = pandas.read_csv("data/words_to_learn.csv")
+    data = pandas.read_csv("words_to_learn.csv")
 except:
-    original_data = pandas.read_csv("data/french_words.csv")
+    original_data = pandas.read_csv("french_words.csv")
     to_learn = original_data.to_dict(orient="records")
 else:
     to_learn = data.to_dict(orient="records")
@@ -36,7 +36,7 @@ def flip_card():
 def is_known():
     to_learn.remove(current_card)
     data = pandas.DataFrame(to_learn)
-    data.to_csv("data/words_to_learn.csv", index=False)
+    data.to_csv("words_to_learn.csv", index=False)
     next_card()
 
 
@@ -50,18 +50,18 @@ window.title("Capstone")
 window.config(padx=100, pady=100, bg=BACKGROUND_COLOR)
 canvas = Canvas(width=800, height=526)
 canvas.config(bg=BACKGROUND_COLOR, highlightthickness=0)
-card_front = PhotoImage(file="images/card_front.png")
-card_back = PhotoImage(file = "images/card_back.png")
+card_front = PhotoImage(file="card_front.png")
+card_back = PhotoImage(file = "card_back.png")
 my_image = canvas.create_image(400, 263, image = card_front)
 my_title = canvas.create_text(380, 150, text="Title", font=("Arial", 35, "bold"))
 my_text = canvas.create_text(380, 250, text="Text", font=("Arial", 25))
 canvas.grid(column=0, row=0, columnspan=2)
 
-wrong_btn_image = PhotoImage(file="images/wrong.png")
+wrong_btn_image = PhotoImage(file="wrong.png")
 wrong_btn = Button(image = wrong_btn_image,highlightthickness=0, command=flip_card)
 wrong_btn.grid(column=0, row=2)
 
-right_btn_image = PhotoImage(file="images/right.png")
+right_btn_image = PhotoImage(file="right.png")
 right_btn = Button(image = right_btn_image,highlightthickness=0, command=is_known)
 right_btn.grid(column=1, row=2)
 
